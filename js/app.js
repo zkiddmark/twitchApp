@@ -11,6 +11,9 @@ var Twat = function(data){
     this.user = ko.observable(data.display_name);
     this.game = ko.observable(data.game);
     this.status = ko.observable(data.status);
+    this.logo = ko.observable(data.logo);
+    this.banner = ko.observable(data.profile_banner);
+    this.url = ko.observable(data.url);
 }
 
 var model = {
@@ -78,15 +81,18 @@ ko.components.register('all-cards', {
 //Twitch card component
 //////////////////////
 ko.components.register('twitch-card', {
-    template: '<div>'
-    +'<div class="card">'
-            +'<ul data-bind="with: card">'
-                +'<li data-bind="text: user"></li>'
-                +'<li data-bind="text: game"></li>'
-                +'<li data-bind="text: status"></li>'
-            +'</ul>'
-        +'</div>'
-    +'</div>',
+    template: '<div>\
+    <div class="card" data-bind="with: card">\
+        <div class="banner">\
+        <img data-bind="attr: {src: banner}"/>\
+        </div>\
+            <img class="logo" data-bind="attr: {src: logo}" src="" alt="Logo" />\
+            <ul>\
+                <li data-bind="text: user"></li>\
+                <li data-bind="text: game"></li>\
+                <li data-bind="text: status"></li>\
+            </ul>\
+    </div>',
     viewModel: function(params){
         var self = this;
         
