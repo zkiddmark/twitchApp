@@ -46,39 +46,6 @@ var model = {
 }
 
 
-// var ViewModel = function() {
-//     var self = this;
-    
-//     self.baseUrl = "https://wind-bow.gomix.me/twitch-api/";
-   
-
-//     self.apiCall = function(type, user) {
-//         $.getJSON(`${self.baseUrl}${type}/${user}?callback=?`,function(response){
-//             // model.CreateCollection(response);
-//             self.twatList.push(new Twat(response));
-//         });
-//     };
-
-//     initialData.forEach(function(user){
-//         self.apiCall("channels", user);
-//     });
-
-//     self.twatList = ko.observableArray();
-//     // self.twatList(model.GetTwats());
-
-//     self.refresh = function(){
-//         // self.twatList().forEach(element => {
-//         //     self.twats.push(element);
-//         // });
-//         // console.log(self.twatList()[0].game());
-//         console.log(self.twatList().length)
-//     }
-    
-//     console.log(self.twatList());
-// }
-
-// model.init();
-// ko.applyBindings(new ViewModel());
 
 ////////////////////////
 //All-Cards component
