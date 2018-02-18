@@ -84,9 +84,11 @@ var model = {
 //All-Cards component
 ///////////////////////
 ko.components.register('all-cards', {
-    template: '<div class="all-cards" data-bind="foreach: cards"><twitch-card params="cards()[0]"></twitch-card> </div>',
+    template: '<div class="all-cards" data-bind="foreach: cards">\
+        <twitch-card params="{text: $data}"></twitch-card>\
+     </div>',
 
-    viewModel: function(){
+    viewModel: function(params){
         var self = this;
 
         self.message = ko.observable("Hello from All cards!!");
@@ -111,47 +113,31 @@ ko.components.register('all-cards', {
 ko.components.register('twitch-card', {
     template: '<div>'
     +'<div class="card">'
-            +'<ul>'
-                +'<li data-bind="text: card.user"></li>'
-                +'<li data-bind="text: card.game"></li>'
-                +'<li data-bind="text: card.status"></li>'
+            +'<ul data-bind="with: card">'
+                +'<li data-bind="text: user"></li>'
+                +'<li data-bind="text: game"></li>'
+                +'<li data-bind="text: status"></li>'
             +'</ul>'
         +'</div>'
     +'</div>',
-    viewModel: function(){
+    viewModel: function(params){
         var self = this;
         
         self.baseUrl = "https://wind-bow.gomix.me/twitch-api/";
-        self.usr = ko.observable();
+        var ctx = params.text;
         self.createCard = function(){
-            self.apiCall("channels", usr);
-        }
+            self.apiCall("channels", ctx);
+        };
         self.apiCall = function(type, user) {
             $.getJSON(`${self.baseUrl}${type}/${user}?callback=?`,function(response){
-                // model.CreateCollection(response);
-                // self.twatList.push(new Twat(response));
-                self.card() = new Twat(response);
+                self.card(new Twat(response));
             });
         };
 
         self.card = ko.observable();
-    
-        // initialData.forEach(function(user){
-        //     self.apiCall("channels", user);
-        // });
-    
-        // self.twatList = ko.observableArray();
-        // // self.twatList(model.GetTwats());
-    
-        // self.refresh = function(){
-        //     // self.twatList().forEach(element => {
-        //     //     self.twats.push(element);
-        //     // });
-        //     // console.log(self.twatList()[0].game());
-        //     console.log(self.twatList().length)
-        // }
-        
-        console.log(self.usr())
+
+        self.createCard()
+       
     }
 });
 ko.applyBindings();
