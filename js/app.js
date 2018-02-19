@@ -84,14 +84,15 @@ ko.components.register('twitch-card', {
     template: '<div>\
     <div class="card" data-bind="with: card">\
         <div class="banner">\
-        <img data-bind="attr: {src: banner}"/>\
-        </div>\
+            <img data-bind="attr: {src: banner}"/>\
             <img class="logo" data-bind="attr: {src: logo}" src="" alt="Logo" />\
-            <ul>\
-                <li data-bind="text: user"></li>\
-                <li data-bind="text: game"></li>\
-                <li data-bind="text: status"></li>\
-            </ul>\
+        </div>\
+        <div class="text-area">\
+            <h3>Twitcher: <span data-bind="text: user" ></span></h3>\
+            <p>Game: <span data-bind="text: game"></span></p>\
+            <p></p>\
+            <p>Status: <span data-bind="text: status"></span>></p>\
+        </div>\
     </div>',
     viewModel: function(params){
         var self = this;
